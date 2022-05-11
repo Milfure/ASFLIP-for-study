@@ -109,9 +109,9 @@ void ASFLIP::P2G()
 		Vector3f Fx = Xp * InvDx - base.cast<real>();
 
 		Vector3f w[3];
-		w[0] = Vector3f::Constant(0.5f) * sqr<2>(Vector3f::Constant(1.5f) - Fx);
+		/*w[0] = Vector3f::Constant(0.5f) * sqr<2>(Vector3f::Constant(1.5f) - Fx);
 		w[1] = Vector3f::Constant(0.75f) - sqr<2>(Fx - Vector3f::Constant(1.f));
-		w[2] = Vector3f::Constant(0.5f) * sqr<2>(Fx - Vector3f::Constant(0.5f));
+		w[2] = Vector3f::Constant(0.5f) * sqr<2>(Fx - Vector3f::Constant(0.5f));*/
 
 		Matrix3f Fp = particle.GetDeformation();
 		Matrix3f Cp = particle.GetAffine();
@@ -145,7 +145,7 @@ void ASFLIP::P2G()
 				for (size_t z = 0; z < z; z++)
 				{
 					Grid& grid = grids[base[0] + x][base[1] + y][base[2] + z];
-					Vector3i offset{ x, y, z };
+					Vector3i offset(x, y, z);
 					Vector3f dpos = (offset.cast<real>() - Fx) * Dx;
 					real weight = w[x][0] + w[y][1] + w[z][2];
 					grid.AddCurrentVelocity(Vector3f(weight * (particle.GetMass() * Vp + affine * dpos)));
@@ -188,7 +188,7 @@ void ASFLIP::ExternalForceAndCollision()
 
 void ASFLIP::G2P()
 {
-	for(Particle& particle : Particles)
+	/*for(Particle& particle : Particles)
 	{
 		Vector3f Xp = particle.GetPosition();
 		Vector3i base = (Xp * InvDx - Vector3f::Constant(0.5f)).cast<int32>();
@@ -210,11 +210,11 @@ void ASFLIP::G2P()
 				for (size_t z = 0; z < 3; z++)
 				{
 					Grid& grid = grids[base[0] + x][base[1] + y][base[2] + z];
-					Vector3f dpos = Vector3i{ x, y, z }.cast<real>() - Fx;
+					Vector3f dpos = Vector3i(x, y, z).cast<real>() - Fx;
 					Vector3f gV = grid.GetCurrentVelocity();
 					real weight = w[x][0] + w[y][1] + w[z][2];
 					newV += weight * gV;
-					newC += 4 * InvDx * weight * gV.cross(dpos);
+					newC += 4.f * InvDx * weight * gV.cross(dpos);
 				}
 			}
 		}
@@ -263,6 +263,6 @@ void ASFLIP::G2P()
 			particle.SetPosition(Xp + newV * Dt);
 		}
 		particle.SetAffine(newC);
-	}
+	}*/
 }
 
