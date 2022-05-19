@@ -152,7 +152,11 @@
     <ClInclude Include="Public\Grid\Grid.h" />
     <ClInclude Include="Public\Grid\GridManager.h" />
     <ClInclude Include="Public\Math\Math.h" />
+    <ClInclude Include="Public\Math\Matrix.h" />
+    <ClInclude Include="Public\Math\Vector.h" />
     <ClInclude Include="Public\Particle\Particle.h" />
+    <ClInclude Include="Public\Utilize\Assert.h" />
+    <ClInclude Include="Public\Utilize\TypeTrait.h" />
     <ClInclude Include="Public\Utilize\Util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
